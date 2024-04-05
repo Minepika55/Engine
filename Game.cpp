@@ -1,14 +1,14 @@
 #include "Game.h"
-Game::Game()
+Game::Game()//Codi que crea la finestra del joc
 	: mWindow(sf::VideoMode(1280, 960), "SFML Game Engine")
 	, mPlayer()
 
 {
-	bgTexture.loadFromFile("sprites/bg.jpeg");
+	bgTexture.loadFromFile("sprites/bg.jpeg");//Codi que carrega el fons
 	bgSprite.setTexture(bgTexture);
-	initEnemics();
+	initEnemics();//Codi que carrega els enemics
 }
-void Game::run()
+void Game::run()//Codi que s'executa durant el joc
 {
 	while (mWindow.isOpen())
 	{
@@ -17,7 +17,7 @@ void Game::run()
 		render();
 	}
 }
-void Game::processEvents()
+void Game::processEvents()//Codi que controla els inputs
 {
 	sf::Event event;
 	while (mWindow.pollEvent(event))
@@ -37,24 +37,24 @@ void Game::processEvents()
 	}
 }
 
-void Game::initEnemics() {
+void Game::initEnemics() {//Codi que crea i coloca els enemics
 	for (const auto& pos : enemicSpawn) {
 		enemics.emplace_back(pos.x, pos.y, 0.005f, 0.005f);
 	}
 }
 
-void Game::update() {
+void Game::update() {//Codi que va actualitzant els enemics el jugador i les bales
 	for (auto& enemic : enemics) {
 		enemic.update();
-		for (const auto& projectil : mPlayer.llencarProjectils()) {
+		for (const auto& projectil : mPlayer.llencarProjectils()) {//Codi que controla si els enemics han xocat contra un projectil
 			if (enemic.getShape().getGlobalBounds().intersects(projectil.getShape().getGlobalBounds())) {
-				enemicsMatats++;
-				enemics.erase(std::remove(enemics.begin(), enemics.end(), enemic), enemics.end());
+				enemicsMatats++;//Puja el comptador
+				enemics.erase(std::remove(enemics.begin(), enemics.end(), enemic), enemics.end());//Esborra l'enemic
 				break;
 			}
 		}
 	}
-	for (auto& enemic : enemics) {
+	for (auto& enemic : enemics) {//Codi que detecta si l'enemic ha tocat la part esquerra de la pantalla i causa un Game Over
 		enemic.update();
 		if (enemic.getShape().getGlobalBounds().intersects(mPlayer.Draw().getGlobalBounds())) {
 			//mWindow.close();//Game Over
@@ -63,7 +63,7 @@ void Game::update() {
 	mPlayer.update();
 }
 
-void Game::render()
+void Game::render()//Codi que renderitza tots els elements del joc
 {
 	mWindow.clear();
 	mWindow.draw(bgSprite);
