@@ -11,6 +11,8 @@ private:
 	sf::CircleShape mPlayer;
 	bool mIsMovingUp = false;
 	std::vector<Projectil> projectils;
+	sf::Texture playerTexture; // Textura del jugador
+	sf::Sprite playerSprite; // Sprite del jugador
 public:
 	Jugador();
 	void update();

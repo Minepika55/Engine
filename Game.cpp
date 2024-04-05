@@ -4,7 +4,9 @@ Game::Game()
 	, mPlayer()
 
 {
-
+	bgTexture.loadFromFile("sprites/bg.jpeg");
+	bgSprite.setTexture(bgTexture);
+	initEnemics();
 }
 void Game::run()
 {
@@ -35,6 +37,12 @@ void Game::processEvents()
 	}
 }
 
+void Game::initEnemics() {
+	for (const auto& pos : enemicSpawn) {
+		enemics.emplace_back(pos.x, pos.y, 0.005f, 0.005f);
+	}
+}
+
 void Game::update() {
 	for (auto& enemic : enemics) {
 		enemic.update();
@@ -49,7 +57,7 @@ void Game::update() {
 	for (auto& enemic : enemics) {
 		enemic.update();
 		if (enemic.getShape().getGlobalBounds().intersects(mPlayer.Draw().getGlobalBounds())) {
-			mWindow.close();//Game Over
+			//mWindow.close();//Game Over
 		}
 	}
 	mPlayer.update();
@@ -58,6 +66,7 @@ void Game::update() {
 void Game::render()
 {
 	mWindow.clear();
+	mWindow.draw(bgSprite);
 	for (const auto& enemic : enemics) {
 		mWindow.draw(enemic.getShape());
 	}

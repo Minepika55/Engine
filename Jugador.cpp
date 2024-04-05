@@ -25,6 +25,8 @@ Jugador::Jugador() {
 	mPlayer.setRadius(40.f);
 	mPlayer.setPosition(100.f, 100.f);
 	mPlayer.setFillColor(sf::Color::Yellow);
+	playerTexture.loadFromFile("sprites/player.png");
+	playerSprite.setTexture(playerTexture);
 }
 sf::CircleShape Jugador::Draw() {
 	return mPlayer;
