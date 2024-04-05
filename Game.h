@@ -18,11 +18,11 @@ private:
 	void render();
 	void initEnemics();
 private:
-	sf::RenderWindow mWindow;
+	sf::RenderWindow mWindow;//Part que crea la finestra
 	Jugador mPlayer;
 	std::vector<Enemic> enemics;
 	int enemicsMatats = 0;
-	std::vector<sf::Vector2f> enemicSpawn = {
+	std::vector<sf::Vector2f> enemicSpawn = {//Spawn dels tres enemics
 	sf::Vector2f(1000.f, 500.f),//Enemic1
 	sf::Vector2f(1000.f, 800.f),//Enemic2
 	sf::Vector2f(1000.f, 300.f)//Enemic3

@@ -3,7 +3,7 @@
 
 using namespace std;
 
-int main()
+int main()//Codi que executa el joc
 {
 	Game game;
 	game.run();
